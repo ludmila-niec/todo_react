@@ -10,7 +10,7 @@ function reducer(state, action) {
         case GET_SAVED_TODOS:
             return { ...state, todos: action.payload };
         case ADD_TODO:
-            return { ...state, todos: [...state.todos, action.payload] };
+            return { ...state, todos: [action.payload, ...state.todos] };
         case TOGGLE_TODO:
             return {
                 ...state,
