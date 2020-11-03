@@ -38,7 +38,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                     <div className={classes.flex}>
                         <AssignmentTurnedIn className={classes.icon} />
                         <Typography variant="h6" className={classes.title}>
-                            Mis tareas
+                            Mis Notas
                         </Typography>
                     </div>
                     <div className={classes.flex}>

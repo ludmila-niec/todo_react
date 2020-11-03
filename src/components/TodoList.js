@@ -1,5 +1,7 @@
 import React from "react";
 import Todo from "./Todo";
+
+//styles
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({

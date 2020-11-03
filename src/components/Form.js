@@ -1,35 +1,19 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+
+//actions for dispatch
 import { ADD_TODO } from "../actions/actionsType";
 
+//components
 import { TextField, Typography, Button } from "@material-ui/core";
 import { AddBox } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-    formContainer: {
-        margin: "3rem auto",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: "2rem",
-        marginBottom: "1.5rem",
-        [theme.breakpoints.up("sm")]: {
-            fontSize: "3rem",
-        },
-    },
-    icon: {
-        fontSize: "2.5rem",
-    },
-    input: {
-        width: "85%",
-    },
-}));
+//id generator
+import { v4 as uuidv4 } from "uuid";
 
-const Form = ({ dispatch }) => {
+//style
+import { useStyles } from "./FormStyle";
+
+const Form = ({ dispatch, darkMode }) => {
     const classes = useStyles();
     //texto ingresado en el input
     const [inputText, setInputText] = useState("");
@@ -44,24 +28,23 @@ const Form = ({ dispatch }) => {
 
         dispatch({ type: ADD_TODO, payload: todo });
         setInputText("");
-        //limpiamos el estado del input text para que quede vacio
     };
 
     return (
         <form className={classes.formContainer}>
             <Typography variant="h1" className={classes.title}>
-                Agregar Tarea
+                No olvidarme!
             </Typography>
             <TextField
                 id="todo"
                 variant="outlined"
-                label="Nueva tarea:"
-                aria-label="ingresar tarea"
-                placeholder="ingresar tarea..."
+                color={darkMode ? "secondary" : "primary"}
+                label="Mi nota:"
+                aria-label="ingresar nota"
+                placeholder="ingresar nota..."
                 onChange={inputTextHandler}
                 value={inputText}
                 className={classes.input}
-                focused
             />
             <Button
                 style={{ marginTop: "2rem" }}

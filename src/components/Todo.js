@@ -1,37 +1,14 @@
 import React from "react";
-import { TOGGLE_TODO, DELETE_TODO } from "../actions/actionsType";
-import { Typography, IconButton, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { CheckBox, Delete } from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-    todoItemContainer: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        listStyle: "none",
-        padding: "1rem",
-        marginBottom: "1.5rem",
-    },
-    todoText: {
-        maxWidth: "60%",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        [theme.breakpoints.up("sm")]: {
-            fontSize: "1.5rem",
-        },
-    },
-    todoCompleted: {
-        textDecoration: "line-through",
-        opacity: 0.5,
-    },
-    icon: {
-        fontSize: "1.5rem",
-        [theme.breakpoints.up("sm")]: {
-            fontSize: "2rem",
-        },
-    },
-}));
+//actions for dispatch
+import { TOGGLE_TODO, DELETE_TODO } from "../actions/actionsType";
+
+//components
+import { Typography, IconButton, Paper } from "@material-ui/core";
+import { CheckBox, HighlightOff } from "@material-ui/icons";
+
+//styles
+import { useStyles } from "./TodoStyle";
 
 const Todo = ({ todo, dispatch }) => {
     const classes = useStyles();
@@ -52,6 +29,7 @@ const Todo = ({ todo, dispatch }) => {
                 <IconButton
                     color="primary"
                     aria-label="button completed todo"
+                    className={classes.button}
                     onClick={() =>
                         dispatch({
                             type: TOGGLE_TODO,
@@ -63,6 +41,7 @@ const Todo = ({ todo, dispatch }) => {
                 </IconButton>
                 <IconButton
                     color="secondary"
+                    className={classes.button}
                     aria-label="button delete todo"
                     onClick={() =>
                         dispatch({
@@ -71,7 +50,7 @@ const Todo = ({ todo, dispatch }) => {
                         })
                     }
                 >
-                    <Delete className={classes.icon} />
+                    <HighlightOff color="error" className={classes.icon} />
                 </IconButton>
             </Paper>
         </Paper>
