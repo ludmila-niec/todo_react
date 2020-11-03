@@ -6,21 +6,14 @@ import reducer from "./reducer";
 import { GET_SAVED_TODOS } from "./actions/actionsType";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { purple } from "@material-ui/core/colors";
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid, CssBaseline } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        minHeight: "100vh",
-    },
-}));
 
 const initialState = {
     todos: [],
+    edited: {},
 };
 
 function App() {
-    const classes = useStyles();
     const [darkMode, setDarkMode] = useState(false);
     const theme = useMemo(
         () =>
@@ -42,7 +35,7 @@ function App() {
         [darkMode]
     );
 
-    const [todos, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     //onMount buscar los todos y theme en localStorage
     useEffect(() => {
@@ -62,8 +55,8 @@ function App() {
 
     //componentDidUpdate guardar todos modificados (nuevo/eliminado)
     useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos.todos));
-    }, [todos]);
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+    }, [state]);
 
     //componentDidUpdate guardar cambio de theme
     useEffect(() => {
@@ -72,14 +65,14 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <div className={classes.container}>
+            <div style={{ minHeight: "100vh" }}>
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
                 <Grid container justify="center" alignItems="center">
                     <Grid item xs={1} md={2} lg={3} />
                     <Grid item xs={10} md={8} lg={6}>
                         <Form dispatch={dispatch} />
                         <hr />
-                        <TodoList todos={todos} dispatch={dispatch} />
+                        <TodoList state={state} dispatch={dispatch} />
                     </Grid>
                     <Grid item xs={1} md={2} lg={3} />
                 </Grid>

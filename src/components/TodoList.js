@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const TodoList = ({ todos, dispatch }) => {
+const TodoList = ({ state, dispatch }) => {
     const classes = useStyles();
-    const myTodos = todos.todos;
+    const myTodos = state.todos;
     return (
         <div style={{ padding: "1.5rem 0" }}>
             <ul className={classes.todoListContainer}>
